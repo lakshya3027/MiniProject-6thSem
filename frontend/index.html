@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Fraud Command Center</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h1>🧠 AI FRAUD COMMAND CENTER</h1>
+    <span class="status">● LIVE MONITORING</span>
+</div>
+
+<div class="dashboard">
+
+    <!-- LEFT PANEL -->
+    <div class="card input-panel">
+        <h2>Transaction Control</h2>
+
+        <input type="number" id="amount" placeholder="Transaction Amount">
+        <input type="number" id="time" placeholder="Transaction Time">
+
+        <h3>PCA Features</h3>
+        <div id="features" class="features"></div>
+
+        <button onclick="predict()">Analyze Transaction</button>
+    </div>
+
+    <!-- CENTER PANEL -->
+    <div class="card result-panel">
+
+        <h2>Risk Engine</h2>
+
+        <div class="gauge">
+            <div id="needle"></div>
+        </div>
+
+        <h3 id="risk">Risk Score: --</h3>
+        <p id="status">Waiting...</p>
+
+        <div class="progress">
+            <div id="bar"></div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="card chart-panel">
+        <h2>Fraud Trend</h2>
+        <canvas id="fraudChart"></canvas>
+    </div>
+
+</div>
+
+<!-- LIVE TRANSACTIONS -->
+<div class="card table-panel">
+    <h2>Live Transactions Feed</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Risk</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="history"></tbody>
+    </table>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

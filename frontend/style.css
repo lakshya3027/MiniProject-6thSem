@@ -1,0 +1,123 @@
+body {
+    margin:0;
+    font-family: Arial;
+    background:#0b0f1a;
+    color:white;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#111827;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:2px solid #e50914;
+}
+
+.status{
+    color:#00ffcc;
+}
+
+/* DASHBOARD GRID */
+.dashboard{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:20px;
+    padding:20px;
+}
+
+/* CARDS */
+.card{
+    background:#111827;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(229,9,20,0.2);
+}
+
+/* INPUTS */
+input{
+    width:100%;
+    margin:8px 0;
+    padding:10px;
+    background:#0b0f1a;
+    border:1px solid #333;
+    color:white;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    background:#e50914;
+    border:none;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#ff1f2f;
+}
+
+/* PCA GRID */
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+}
+
+/* GAUGE */
+.gauge{
+    width:260px;
+    height:130px;
+    margin:auto;
+    border-radius:260px 260px 0 0;
+    background:conic-gradient(
+        #00ff88 0deg 120deg,
+        #ffaa00 120deg 240deg,
+        #ff0033 240deg 360deg
+    );
+    position:relative;
+}
+
+#needle{
+    width:4px;
+    height:120px;
+    background:white;
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform-origin:bottom;
+    transform:rotate(-90deg);
+}
+
+/* PROGRESS BAR */
+.progress{
+    background:#222;
+    height:10px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+#bar{
+    height:100%;
+    width:0%;
+    background:#e50914;
+    transition:1s;
+}
+
+/* TABLE */
+.table-panel{
+    margin:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #333;
+}
