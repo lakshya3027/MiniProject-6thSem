@@ -7,6 +7,7 @@ from pydantic import BaseModel
 import numpy as np
 import joblib
 import os
+from typing import List
 
 # ===============================
 # CREATE FASTAPI APP
@@ -34,7 +35,7 @@ app.add_middleware(
 class Transaction(BaseModel):
     time: float
     amount: float
-    V_features: list[float]
+    V_features: List[float]
 
 
 # ===============================
@@ -42,12 +43,23 @@ class Transaction(BaseModel):
 # ===============================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-try:
-    model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
-    time_scaler = joblib.load(os.path.join(BASE_DIR, "time_scaler.pkl"))
-    amount_scaler = joblib.load(os.path.join(BASE_DIR, "amount_scaler.pkl"))
-except Exception as e:
-    raise RuntimeError(f"Error loading model or scalers: {e}")
+model = None
+time_scaler = None
+amount_scaler = None
+
+@app.on_event("startup")
+def load_model():
+    global model, time_scaler, amount_scaler
+
+    try:
+        model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+        time_scaler = joblib.load(os.path.join(BASE_DIR, "time_scaler.pkl"))
+        amount_scaler = joblib.load(os.path.join(BASE_DIR, "amount_scaler.pkl"))
+        print("✅ Model and scalers loaded successfully")
+
+    except Exception as e:
+        print(f"❌ Model loading failed: {e}")
+        raise e
 
 
 # ===============================
@@ -72,6 +84,8 @@ def health_check():
 @app.post("/predict")
 def predict(transaction: Transaction):
 
+    if model is None:
+        raise HTTPException(status_code=500, detail="Model not loaded")
     try:
         # -----------------------------
         # EXTRACT DATA
